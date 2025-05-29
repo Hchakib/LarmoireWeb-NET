@@ -1,0 +1,123 @@
+﻿@model IEnumerable<LarmoireWeb.Models.RenovationRequest>
+@using System.Linq
+
+@section Styles {
+    <style>
+        /* Card container for requests list */
+        .card-container {
+            background-color: #ffffff;
+            border: 1px solid #e3e6ea;
+            border-radius: .5rem;
+            box-shadow: 0 .2rem .4rem rgba(0,0,0,0.05);
+        }
+        /* Hover-lift effect */
+        .hover-lift {
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+            .hover-lift:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 .4rem .8rem rgba(0,0,0,0.05) !important;
+            }
+        /* Table header accent */
+        .table thead {
+            background-color: #5c3a21;
+            color: #ffffff;
+        }
+        /* Row hover effect */
+        .table tbody tr:hover {
+            background-color: rgba(92,58,33,0.1);
+        }
+        /* Thumbnail image */
+        .thumb-img {
+            max-width: 80px;
+            border-radius: .25rem;
+            box-shadow: 0 .1rem .2rem rgba(0,0,0,0.1);
+        }
+        /* Truncate description */
+        .truncate {
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* Button styling */
+        .btn-wood {
+            background-color: #5c3a21;
+            border-color: #5c3a21;
+            color: #ffffff;
+        }
+
+            .btn-wood:hover {
+                background-color: #4e2e20;
+                border-color: #4e2e20;
+            }
+    </style>
+}
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Mes demandes de rénovation";
+    bool isAuthenticated = User.Identity.IsAuthenticated;
+}
+
+<section class="container py-5">
+    <div class="card card-container p-4 hover-lift">
+        <h2 class="fw-semibold mb-4">@ViewData["Title"]</h2>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info">
+                Vous n'avez soumis aucune demande pour le moment.
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table align-middle mb-0 hover-lift">
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Description</th>
+                            <th>Demandée le</th>
+                            <th>Statut</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @{
+                                        var firstUrl = item.ImageUrls?.Split(';').FirstOrDefault();
+                                    }
+                                    @if (!string.IsNullOrEmpty(firstUrl))
+                                    {
+                                        <img src="@firstUrl" alt="Photo rénovation" class="thumb-img" />
+                                    }
+                                </td>
+                                <td><span class="truncate">@item.Description</span></td>
+                                <td>@item.CreatedAt.ToLocalTime().ToString("g")</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-wood">
+                                        Détails
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        <div class="text-end mt-4">
+            <a asp-action="Create" class="btn btn-wood">Nouvelle demande</a>
+        </div>
+    </div>
+</section>

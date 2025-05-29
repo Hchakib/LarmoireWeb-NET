@@ -1,0 +1,33 @@
+﻿@model LarmoireWeb.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Mon profil";
+    Layout = "_Layout";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Prénom</dt>
+            <dd class="col-sm-9">@Model.Prenom</dd>
+
+            <dt class="col-sm-3">Nom</dt>
+            <dd class="col-sm-9">@Model.Nom</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+
+            <dt class="col-sm-3">Téléphone</dt>
+            <dd class="col-sm-9">@Model.PhoneNumber</dd>
+
+            <dt class="col-sm-3">Adresse</dt>
+            <dd class="col-sm-9">@Model.Adresse</dd>
+        </dl>
+
+        <a asp-action="EditProfile" class="btn btn-primary">
+            Modifier mon profil
+        </a>
+    </div>
+</div>

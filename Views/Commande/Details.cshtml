@@ -1,0 +1,101 @@
+﻿@model LarmoireWeb.Models.Commande
+@using LarmoireWeb.Models
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+@section Styles {
+    <style>
+        .detail-card {
+            background-color: #ffffff;
+            border: 1px solid #e3e6ea;
+            border-radius: .5rem;
+            box-shadow: 0 .2rem .4rem rgba(0,0,0,0.05);
+        }
+
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            border: none;
+            border-bottom: 1px solid #e9ecef;
+            padding: .75rem 1rem;
+        }
+
+            .list-group-item:last-child {
+                border-bottom: none;
+            }
+
+        .table-responsive {
+            margin-top: 1rem;
+        }
+
+        .table thead {
+            background-color: #5c3a21; /* dark wood accent */
+            color: #ffffff;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(92,58,33,0.1);
+        }
+    </style>
+}
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Détails de la commande";
+}
+
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card detail-card p-4">
+                <h2 class="fw-semibold mb-4">@ViewData["Title"]</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><span>ID</span><span>@Model.Id</span></li>
+                    <li class="list-group-item"><span>Date</span><span>@Model.Date.ToLocalTime().ToString("g")</span></li>
+                    <li class="list-group-item"><span>Statut</span><span>@Model.Statut</span></li>
+                    <li class="list-group-item"><span>Total</span><span>@Model.Total.ToString("C")</span></li>
+                    @if (Model.Utilisateur != null)
+                    {
+                        <li class="list-group-item">
+                            <span>Client</span>
+                            <span>
+                                @Model.Utilisateur.Prenom @Model.Utilisateur.Nom<br />
+                                <small>@Model.Utilisateur.Email</small>
+                            </span>
+                        </li>
+                    }
+                </ul>
+
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Produit</th>
+                                <th>Quantité</th>
+                                <th>Prix unitaire</th>
+                                <th>Sous-total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CommandeProduits)
+                            {
+                                <tr>
+                                    <td>@item.Produit.Nom</td>
+                                    <td>@item.Quantite</td>
+                                    <td>@item.PrixUnitaire.ToString("C")</td>
+                                    <td>@(item.Quantite * item.PrixUnitaire).ToString("C")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4 text-end">
+                    <a asp-action="Index" asp-controller="Commande" class="btn btn-outline-secondary">
+                        &larr; Retour aux commandes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

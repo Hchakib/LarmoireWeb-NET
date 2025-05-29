@@ -1,0 +1,163 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = LarmoireWeb
+build_property.RootNamespace = LarmoireWeb
+build_property.ProjectDir = C:\Users\Utilisateur\Documents\TECCART\session4\aplitransac2\LarmoireWeb\LarmoireWeb\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Utilisateur\Documents\TECCART\session4\aplitransac2\LarmoireWeb\LarmoireWeb
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Categorie/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Categorie/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Categorie/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Categorie/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Categorie/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Commande/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbWFuZGVcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Commande/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbWFuZGVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Commande/MyOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tbWFuZGVcTXlPcmRlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Panier/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFuaWVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Produit/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVpdFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Produit/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVpdFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Produit/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVpdFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Produit/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVpdFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Produit/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVpdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Renovation/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVub3ZhdGlvblxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Renovation/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVub3ZhdGlvblxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Renovation/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVub3ZhdGlvblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Renovation/MyRequests.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVub3ZhdGlvblxNeVJlcXVlc3RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Shared/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEFjY2Vzc0RlbmllZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/User/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/User/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/User/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0UHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/User/EditUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0VXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/User/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Utilisateur/Documents/TECCART/session4/aplitransac2/LarmoireWeb/LarmoireWeb/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-n2ctinxm7b

@@ -1,0 +1,152 @@
+﻿@model LarmoireWeb.ViewModels.RenovationIndexVm
+@using System.Linq
+
+@section Styles {
+    <style>
+        /* Card container for requests list */
+        .card-container {
+            background-color: #ffffff;
+            border: 1px solid #e3e6ea;
+            border-radius: .5rem;
+            box-shadow: 0 .2rem .4rem rgba(0,0,0,0.05);
+        }
+        /* Lift effect on hover */
+        .hover-lift {
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+            .hover-lift:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 .4rem .8rem rgba(0,0,0,0.05) !important;
+            }
+        /* Focus styling for filter input */
+        .filter-input .form-control:focus {
+            border-color: #5c3a21;
+            box-shadow: 0 0 .2rem rgba(92,58,33,0.25);
+        }
+        /* Primary button accent: dark wood */
+        .btn-primary {
+            background-color: #5c3a21 !important;
+            border-color: #5c3a21 !important;
+        }
+
+            .btn-primary:hover {
+                background-color: #4e2e20 !important;
+                border-color: #4e2e20 !important;
+            }
+        /* Table header styling */
+        .table thead {
+            background-color: #5c3a21;
+            color: #ffffff;
+        }
+        /* Row hover effect */
+        .table tbody tr:hover {
+            background-color: rgba(92,58,33,0.1);
+        }
+        /* Thumbnail images */
+        .thumb-img {
+            max-width: 60px;
+            border-radius: .25rem;
+        }
+        /* Truncate description */
+        .truncate {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+    </style>
+}
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Gestion des demandes de rénovation";
+}
+
+<section class="container py-5">
+    <div class="card card-container p-4 mb-4 hover-lift">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+            <h2 class="fw-semibold mb-0">@ViewData["Title"]</h2>
+            <form method="get" class="filter-input d-flex w-100 w-md-50">
+                <input type="text"
+                       name="searchTerm"
+                       value="@Model.SearchTerm"
+                       class="form-control"
+                       placeholder="Rechercher nom / prénom / téléphone" />
+                <button type="submit" class="btn btn-primary ms-2">Filtrer</button>
+            </form>
+        </div>
+        @if (!Model.Requests.Any())
+        {
+            <div class="alert alert-info mb-0">Aucune demande trouvée.</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table align-middle mb-0 hover-lift">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Utilisateur</th>
+                            <th>Photo</th>
+                            <th>Description</th>
+                            <th>Demandée le</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Requests)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>
+                                    @item.User.Prenom @item.User.Nom<br />
+                                    <small>@item.User.PhoneNumber</small>
+                                </td>
+                                <td>
+                                    @{
+                                        var firstUrl = item.ImageUrls?.Split(';').FirstOrDefault();
+                                    }
+                                    @if (!string.IsNullOrEmpty(firstUrl))
+                                    {
+                                        <img src="@firstUrl" alt="Photo renovation" class="thumb-img" />
+                                    }
+                                </td>
+                                <td><span class="truncate">@item.Description</span></td>
+                                <td>@item.CreatedAt.ToLocalTime().ToString("g")</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-primary me-1">Détails</a>
+                                    @if (item.Status == RequestStatus.Pending)
+                                    {
+                                        <form asp-action="Accept" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button class="btn btn-success btn-sm">Accepter</button>
+                                        </form>
+                                        <form asp-action="Reject" method="post" class="d-inline ms-1">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button class="btn btn-danger btn-sm">Refuser</button>
+                                        </form>
+                                    }
+                                    else if (item.Status == RequestStatus.Accepted)
+                                    {
+                                        <form asp-action="Complete" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button class="btn btn-secondary btn-sm">Terminer</button>
+                                        </form>
+                                    }
+                                    <form asp-action="Remove" method="post" class="d-inline ms-1">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Supprimer cette demande ?');">Supprimer</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</section>

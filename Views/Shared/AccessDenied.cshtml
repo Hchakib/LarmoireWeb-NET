@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Accès refusé";
+}
+
+@section Styles {
+    <style>
+        .access-denied-container {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .access-denied-icon {
+            font-size: 4rem;
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+    </style>
+}
+
+<section class="container access-denied-container">
+    <div>
+        <i class="bi bi-shield-lock-fill access-denied-icon"></i>
+        <h1 class="display-4 fw-semibold mb-3">Accès refusé</h1>
+        <p class="lead text-muted mb-4">
+            Vous n’avez pas la permission d’accéder à cette page.<br />
+            Si vous pensez qu’il s’agit d’une erreur, contactez l’administrateur.
+        </p>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-lg px-4">
+            Retour à l’accueil
+        </a>
+    </div>
+</section>

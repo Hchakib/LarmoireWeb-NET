@@ -1,0 +1,69 @@
+﻿@model LarmoireWeb.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Modifier mon profil";
+    Layout = "_Layout";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="EditProfile" method="post" class="needs-validation" novalidate>
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <!-- Prénom -->
+    <div class="form-group mb-3">
+        <label asp-for="Prenom" class="form-label"></label>
+        <input asp-for="Prenom" class="form-control" />
+        <span asp-validation-for="Prenom" class="text-danger"></span>
+    </div>
+
+    <!-- Nom -->
+    <div class="form-group mb-3">
+        <label asp-for="Nom" class="form-label"></label>
+        <input asp-for="Nom" class="form-control" />
+        <span asp-validation-for="Nom" class="text-danger"></span>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <!-- Adresse -->
+    <div class="form-group mb-3">
+        <label asp-for="Adresse" class="form-label"></label>
+        <input asp-for="Adresse" class="form-control" />
+        <span asp-validation-for="Adresse" class="text-danger"></span>
+    </div>
+
+    <!-- Téléphone -->
+    <div class="form-group mb-3">
+        <label asp-for="PhoneNumber" class="form-label"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <!-- Rôle (visible uniquement aux admins) -->
+    @if (ViewBag.IsAdmin == true)
+    {
+        <div class="form-group mb-3">
+            <label asp-for="Role" class="form-label"></label>
+            <select asp-for="Role" class="form-control">
+                <option value="Client">Client</option>
+                <option value="Admin">Admin</option>
+            </select>
+            <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-success">Enregistrer les modifications</button>
+    <a asp-action="Profile" class="btn btn-secondary ms-2">Annuler</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

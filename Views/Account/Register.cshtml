@@ -1,0 +1,110 @@
+﻿@model LarmoireWeb.ViewModels.RegisterVm
+
+@section Styles {
+    <style>
+        /* Accent color override: modern teal */
+        :root {
+            --bs-primary: #20c997;
+            --bs-primary-hover: #17a589;
+        }
+
+        .register-card {
+            background-color: #ffffff;
+            border: 1px solid #e3e6ea;
+            border-radius: .5rem;
+            box-shadow: 0 .2rem .4rem rgba(0,0,0,0.05);
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #343a40;
+        }
+
+        .form-control:focus {
+            border-color: var(--bs-primary) !important;
+            box-shadow: 0 0 .2rem rgba(32,201,151,0.25) !important;
+        }
+
+        .btn-primary {
+            background-color: var(--bs-primary) !important;
+            border-color: var(--bs-primary) !important;
+            padding: .5rem 1.5rem;
+        }
+
+            .btn-primary:hover {
+                background-color: var(--bs-primary-hover) !important;
+                border-color: var(--bs-primary-hover) !important;
+            }
+    </style>
+}
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Inscription";
+}
+
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card register-card p-5">
+                <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+                <form asp-action="Register" method="post" class="row g-4">
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Prenom" class="form-label">Prénom</label>
+                        <input asp-for="Prenom" class="form-control" />
+                        <span asp-validation-for="Prenom" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Nom" class="form-label">Nom</label>
+                        <input asp-for="Nom" class="form-control" />
+                        <span asp-validation-for="Nom" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="PhoneNumber" class="form-label">Téléphone</label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Adresse" class="form-label">Adresse</label>
+                        <input asp-for="Adresse" class="form-control" />
+                        <span asp-validation-for="Adresse" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Password" class="form-label">Mot de passe</label>
+                        <input asp-for="Password" type="password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="ConfirmPassword" class="form-label">Confirmer mot de passe</label>
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-primary w-100">S’inscrire</button>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary w-100 mt-3">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,65 @@
+﻿@model LarmoireWeb.Models.Categorie
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Supprimer une catégorie";
+}
+
+@section Styles {
+    <style>
+        /* Card styling for delete confirmation */
+        .delete-card {
+            background-color: #ffffff;
+            border: 1px solid #e3e6ea;
+            border-radius: .5rem;
+            box-shadow: 0 .2rem .4rem rgba(0,0,0,0.05);
+        }
+
+        .delete-alert {
+            font-size: 1.125rem;
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            border-radius: .25rem;
+            padding: 1rem;
+        }
+
+        .delete-card h2 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+                border-color: #bd2130;
+            }
+    </style>
+}
+
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card delete-card p-4 text-center">
+                <h2>@ViewData["Title"]</h2>
+                <div class="alert delete-alert mt-3">
+                    <p>Voulez-vous vraiment supprimer la catégorie &laquo; <strong>@Model.Nom</strong> &raquo; ?</p>
+                </div>
+                <form asp-action="Delete" method="post" class="mt-4">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger px-4 me-2">Supprimer</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">Annuler</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

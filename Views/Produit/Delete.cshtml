@@ -1,0 +1,82 @@
+﻿@model LarmoireWeb.Models.Produit
+@using LarmoireWeb.Models
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+@section Styles {
+    <style>
+        .hover-lift {
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+            .hover-lift:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 .4rem .8rem rgba(0,0,0,0.05) !important;
+            }
+
+        .product-img-container {
+            overflow: hidden;
+            border-radius: .25rem;
+        }
+
+            .product-img-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            padding: .75rem 1rem;
+        }
+    </style>
+}
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Supprimer le produit";
+}
+
+<section class="container py-4">
+    <div class="card shadow-sm rounded-2 hover-lift">
+        <div class="card-body">
+            <h2 class="fw-semibold mb-3">@ViewData["Title"]</h2>
+
+            <div class="alert alert-warning">Voulez-vous vraiment supprimer ce produit&nbsp;?</div>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <div class="product-img-container ratio ratio-4x3 mb-3">
+                            <img src="@Model.ImageUrl" alt="@Model.Nom" />
+                        </div>
+                    }
+                </div>
+                <div class="col-md-8">
+                    <ul class="list-group list-group-flush mb-4">
+                        <li class="list-group-item"><span>Nom</span><span>@Model.Nom</span></li>
+                        <li class="list-group-item"><span>Catégorie</span><span>@Model.Categorie?.Nom</span></li>
+                        <li class="list-group-item"><span>Prix</span><span>@Model.Prix.ToString("C")</span></li>
+                        <li class="list-group-item"><span>Stock</span><span>@Model.Stock</span></li>
+                        <li class="list-group-item">
+                            <span>Statut</span>
+                            <span>
+                                <span class="badge @(Model.Stock > 0 ? "bg-success" : "bg-danger")">
+                                    @Model.Statut
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <form asp-action="DeleteConfirmed" method="post">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+                <a asp-action="Index" class="btn btn-outline-secondary ms-2">Annuler</a>
+            </form>
+        </div>
+    </div>
+</section>

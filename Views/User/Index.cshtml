@@ -1,0 +1,56 @@
+﻿@model LarmoireWeb.ViewModels.UserIndexVm
+
+@{
+    ViewData["Title"] = "Gestion des utilisateurs";
+    Layout = "_Layout";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="get" class="mb-3">
+    <div class="input-group w-50">
+        <input type="text"
+               name="searchTerm"
+               value="@Model.SearchTerm"
+               class="form-control"
+               placeholder="Rechercher prénom, nom ou téléphone" />
+        <button type="submit" class="btn btn-secondary">Filtrer</button>
+    </div>
+</form>
+
+@if (!Model.Users.Any())
+{
+    <div class="alert alert-info">Aucun utilisateur trouvé.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Rôle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model.Users)
+            {
+                <tr>
+                    <td>@u.Prenom</td>
+                    <td>@u.Nom</td>
+                    <td>@u.Email</td>
+                    <td>@u.PhoneNumber</td>
+                    <td>@u.Role</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@u.Id" class="btn btn-sm btn-info">Détails</a>
+                        <a asp-action="EditUser" asp-route-id="@u.Id" class="btn btn-sm btn-warning ms-1">Modifier</a>
+                        <a asp-action="Delete" asp-route-id="@u.Id" class="btn btn-sm btn-danger ms-1">Supprimer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

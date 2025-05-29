@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Nouvelle demande de rénovation";
+}
+
+@section Styles {
+    <style>
+        .renov-card {
+            background-color: #ffffff;
+            border: 1px solid #e3e6ea;
+            border-radius: .5rem;
+            box-shadow: 0 .2rem .4rem rgba(0,0,0,0.05);
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #343a40;
+        }
+
+        .form-control:focus {
+            border-color: #5c3a21;
+            box-shadow: 0 0 .2rem rgba(92,58,33,0.25);
+        }
+
+        .btn-primary {
+            background-color: #5c3a21 !important;
+            border-color: #5c3a21 !important;
+            padding: .5rem 1.5rem;
+        }
+
+            .btn-primary:hover {
+                background-color: #4e2e20 !important;
+                border-color: #4e2e20 !important;
+            }
+
+        .btn-outline-secondary {
+            color: #343a40;
+            border-color: #6c757d;
+        }
+
+            .btn-outline-secondary:hover {
+                background-color: #e2e6ea;
+                color: #212529;
+            }
+    </style>
+}
+
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card renov-card p-4 hover-lift">
+                <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+                @using (Html.BeginForm("Create", "Renovation", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-4">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="description" id="description" class="form-control" rows="4" placeholder="Décrivez votre projet..."></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="photos" class="form-label">Photos (plusieurs possibles)</label>
+                        <input type="file" name="photos" id="photos" multiple class="form-control" />
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+                    </div>
+                }
+
+                <div class="text-center mt-3">
+                    <a asp-action="MyRequests" class="btn btn-outline-secondary">Voir mes demandes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

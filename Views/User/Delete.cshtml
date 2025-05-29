@@ -1,0 +1,38 @@
+﻿@model LarmoireWeb.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Supprimer l'utilisateur";
+    Layout = "_Layout";
+}
+
+<h2 class="text-danger">@ViewData["Title"]</h2>
+
+<div class="alert alert-warning">
+    <p>Êtes-vous sûr de vouloir supprimer cet utilisateur ?</p>
+</div>
+
+<div class="mb-4">
+    <dl class="row">
+        <dt class="col-sm-3">Nom complet</dt>
+        <dd class="col-sm-9">@Model.Prenom @Model.Nom</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+
+        <dt class="col-sm-3">Téléphone</dt>
+        <dd class="col-sm-9">@Model.PhoneNumber</dd>
+
+        <dt class="col-sm-3">Rôle</dt>
+        <dd class="col-sm-9">@Model.Role</dd>
+    </dl>
+</div>
+
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">
+        Oui, supprimer
+    </button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">
+        Annuler
+    </a>
+</form>

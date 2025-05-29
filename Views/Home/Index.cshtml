@@ -1,0 +1,96 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Accueil";
+}
+
+@section Styles {
+    <style>
+        .hero-section {
+            background: url('/images/hero-bg.jpg') center/cover no-repeat;
+            color: #ffffff;
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card {
+            border: none;
+            border-radius: .5rem;
+            box-shadow: 0 .2rem .4rem rgba(0,0,0,0.1);
+            transition: transform .2s, box-shadow .2s;
+        }
+
+            .feature-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 .4rem .8rem rgba(0,0,0,0.15);
+            }
+
+        .btn-wood {
+            background-color: #5c3a21;
+            border: 2px solid #5c3a21;
+            color: #ffffff;
+            padding: .75rem 1.5rem;
+            border-radius: .25rem;
+            font-size: 1.25rem;
+            transition: background-color .2s, color .2s;
+        }
+
+            .btn-wood:hover {
+                background-color: #4e2e20;
+                color: #ffffff;
+            }
+    </style>
+}
+
+<section class="hero-section text-center">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <h1 class="display-3 fw-bold">Bienvenue sur LarmoireWeb</h1>
+        <p class="lead mb-4">Découvrez nos produits et rénovez votre espace avec style et simplicité.</p>
+        <a class="btn-wood me-3" asp-controller="Produit" asp-action="Index">Voir les produits</a>
+        <a class="btn-wood" asp-controller="Renovation" asp-action="MyRequests">Mes demandes</a>
+    </div>
+</section>
+
+<section class="container py-5">
+    <h2 class="text-center mb-5">Nos services phares</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card feature-card p-4 text-center h-100 hover-lift">
+                <i class="bi bi-box-seam fs-1 mb-3" style="color:#5c3a21"></i>
+                <h5 class="card-title mb-2">Large choix de produits</h5>
+                <p class="card-text text-muted">Parcourez notre catalogue varié d'articles de qualité.</p>
+                <a asp-controller="Produit" asp-action="Index" class="stretched-link"></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card p-4 text-center h-100 hover-lift">
+                <i class="bi bi-gear fs-1 mb-3" style="color:#5c3a21"></i>
+                <h5 class="card-title mb-2">Services de rénovation</h5>
+                <p class="card-text text-muted">Soumettez vos projets et suivez leur avancement en ligne.</p>
+                <a asp-controller="Renovation" asp-action="Create" class="stretched-link"></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card p-4 text-center h-100 hover-lift">
+                <i class="bi bi-pencil-square fs-1 mb-3" style="color:#5c3a21"></i>
+                <h5 class="card-title mb-2">Demandes de rénovation</h5>
+                <p class="card-text text-muted">Soumettez et gérez facilement vos demandes de rénovation.</p>
+                <a asp-controller="Renovation" asp-action="Create" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+</section>

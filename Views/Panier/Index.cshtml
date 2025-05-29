@@ -1,0 +1,180 @@
+﻿@model IEnumerable<LarmoireWeb.Models.Panier>
+@using System.Globalization
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+@section Styles {
+    <style>
+        /* Card wrapping the cart summary */
+        .cart-card {
+            background-color: #ffffff;
+            border: 1px solid #e3e6ea;
+            border-radius: .5rem;
+            box-shadow: 0 .2rem .4rem rgba(0,0,0,0.05);
+        }
+        /* Responsive table container */
+        .table-responsive {
+            margin-top: 1rem;
+        }
+        /* Header row accent */
+        .table thead {
+            background-color: #5c3a21;
+            color: #ffffff;
+        }
+        /* Row hover effect */
+        .table tbody tr:hover {
+            background-color: rgba(92,58,33,0.1);
+        }
+        /* Thumbnail styling */
+        .product-thumb {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: .25rem;
+            box-shadow: 0 .1rem .2rem rgba(0,0,0,0.1);
+        }
+        /* Quantity input styling */
+        .qty-input {
+            width: 80px;
+            text-align: center;
+        }
+        /* Button styles */
+        .btn-wood {
+            background-color: #5c3a21;
+            border-color: #5c3a21;
+            color: #ffffff;
+        }
+
+            .btn-wood:hover {
+                background-color: #4e2e20;
+                border-color: #4e2e20;
+            }
+
+        .btn-outline-wood {
+            color: #5c3a21;
+            border-color: #5c3a21;
+        }
+
+            .btn-outline-wood:hover {
+                background-color: #5c3a21;
+                color: #ffffff;
+            }
+        /* Hover-lift effect for card */
+        .hover-lift {
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+            .hover-lift:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 .4rem .8rem rgba(0,0,0,0.05) !important;
+            }
+    </style>
+}
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Sommaire du panier";
+    decimal total = Model.Sum(i => i.Quantite * i.Produit.Prix);
+    var cad = CultureInfo.GetCultureInfo("en-CA");
+    var currentUser = UserManager.GetUserAsync(User).Result;
+    bool isAdmin = currentUser?.Role == "Admin";
+}
+
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card cart-card p-4 hover-lift">
+                <h2 class="text-center mb-4 fw-semibold">@ViewData["Title"]</h2>
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width:10%;"></th>
+                                <th>Produit</th>
+                                <th class="text-center" style="width:15%;">Prix</th>
+                                <th class="text-center" style="width:15%;">Quantité</th>
+                                <th class="text-center" style="width:15%;">Sous-total</th>
+                                <th class="text-center" style="width:10%;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="@item.Produit.ImageUrl" alt="@item.Produit.Nom" class="product-thumb" />
+                                    </td>
+                                    <td>@item.Produit.Nom</td>
+                                    <td class="text-center">@item.Produit.Prix.ToString("C", cad)</td>
+                                    <td class="text-center">
+                                        <form asp-controller="Panier" asp-action="Add" method="post" class="d-inline-flex align-items-center">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="produitId" value="@item.ProduitId" />
+                                            <input type="number" name="quantite" value="@item.Quantite" min="1" max="@item.Produit.Stock" class="form-control qty-input me-2" onchange="this.form.submit()" />
+                                        </form>
+                                        <small class="d-block text-muted">Stock: @item.Produit.Stock</small>
+                                    </td>
+                                    <td class="text-center">@(item.Quantite * item.Produit.Prix).ToString("C", cad)</td>
+                                    <td class="text-center">
+                                        <form asp-controller="Panier" asp-action="Remove" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-outline-wood btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-light">
+                                <td colspan="3"></td>
+                                <td class="text-end"><strong>Total :</strong></td>
+                                <td class="text-center"><strong>@total.ToString("C", cad)</strong></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-controller="Produit" asp-action="Index" class="btn btn-outline-wood">
+                        <i class="bi bi-cart-plus me-2"></i>Ajouter des articles
+                    </a>
+                    @if (!isAdmin && Model.Any())
+                    {
+                        <button id="paypal-btn" class="btn btn-wood">
+                            <i class="bi bi-credit-card me-2"></i>Payer (CAD)
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        (function () {
+            var btn = document.getElementById('paypal-btn');
+            if (!btn) return;
+            var total = parseFloat('@(total.ToString("F2", CultureInfo.InvariantCulture))');
+            paypal.Button.render({
+                env: 'sandbox',
+                client: { sandbox: 'AS2dxS2Gg-jdKq5wHIZL3HO36cso84WsYxcS7vnb7B9Hj0adwhjt87OU2-WQ8YbaGSeKlnDIEPaI9-sr' },
+                locale: 'en_CA',
+                style: { size: 'medium', color: 'gold', shape: 'pill', label: 'pay' },
+                commit: true,
+                payment: function (data, actions) {
+                    return actions.payment.create({ transactions: [{ amount: { total: total.toFixed(2), currency: 'CAD' } }] });
+                },
+                onAuthorize: function (data, actions) {
+                    return actions.payment.execute().then(function () { window.location.href = '@Url.Action("CompleteOrder", "Commande")'; });
+                },
+                onError: function (err) { console.error(err); alert('Erreur PayPal : ' + err); }
+            }, '#paypal-btn');
+        })();
+    </script>
+}

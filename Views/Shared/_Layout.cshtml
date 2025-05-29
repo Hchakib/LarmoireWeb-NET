@@ -1,0 +1,90 @@
+﻿@using LarmoireWeb.Models
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - LarmoireWeb</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- CSS global -->
+    <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/custom.css" rel="stylesheet" asp-append-version="true" />
+
+    @RenderSection("Styles", required: false)
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light text-body">
+    <header class="sticky-top shadow-sm bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <a class="navbar-brand fs-3 fw-bold text-primary me-4" asp-controller="Home" asp-action="Index">LarmoireWeb</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
+                    <li class="nav-item"><a class="nav-link px-2 py-1" asp-controller="Home" asp-action="Index">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link px-2 py-1" asp-controller="Produit" asp-action="Index">Produits</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item"><a class="nav-link px-2 py-1" asp-controller="Panier" asp-action="Index">Panier</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 py-1" asp-controller="Commande" asp-action="MyOrders">Commandes</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 py-1" asp-controller="Renovation" asp-action="MyRequests">Rénovations</a></li>
+                    }
+                    @{
+                        bool isAdmin = User.Identity.IsAuthenticated ? UserManager.GetUserAsync(User).Result?.Role == "Admin" : false;
+                    }
+                    @if (isAdmin)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle px-2 py-1" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="User" asp-action="Index">Utilisateurs</a></li>
+                                <li><a class="dropdown-item" asp-controller="Produit" asp-action="Index">Produits</a></li>
+                                <li><a class="dropdown-item" asp-controller="Categorie" asp-action="Index">Catégories</a></li>
+                                <li><a class="dropdown-item" asp-controller="Commande" asp-action="Index">Commandes</a></li>
+                                <li><a class="dropdown-item" asp-controller="Renovation" asp-action="Index">Rénovations</a></li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav ms-auto gap-2">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item"><a class="nav-link px-2 py-1" asp-controller="User" asp-action="Profile">Profil</a></li>
+                        <li class="nav-item">
+                            <form asp-controller="Account" asp-action="Logout" method="post">
+                                <button type="submit" class="btn btn-outline-danger btn-sm px-3">Déconnexion</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="btn btn-outline-primary btn-sm px-3" asp-controller="Account" asp-action="Register">Inscription</a></li>
+                        <li class="nav-item"><a class="btn btn-primary btn-sm px-3" asp-controller="Account" asp-action="Login">Connexion</a></li>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container flex-fill my-5">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-dark text-light py-4 mt-auto">
+        <div class="container text-center small">
+            &copy; 2025 LarmoireWeb &bull; <a asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-light">Confidentialité</a>
+        </div>
+    </footer>
+
+    <!-- Scripts Bootstrap & Site -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

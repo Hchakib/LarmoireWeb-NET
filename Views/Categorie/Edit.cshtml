@@ -1,0 +1,75 @@
+﻿@model LarmoireWeb.Models.Categorie
+
+@section Styles {
+    <style>
+        /* Card container styling */
+        .form-card {
+            background-color: #ffffff;
+            border: 1px solid #e3e6ea;
+            border-radius: .5rem;
+            box-shadow: 0 .2rem .4rem rgba(0,0,0,0.05);
+        }
+        /* Labels styling */
+        .form-label {
+            font-weight: 500;
+            color: #343a40;
+        }
+        /* Accent color: teal */
+        :root {
+            --bs-primary: #20c997;
+            --bs-primary-hover: #17a589;
+        }
+
+        .form-control:focus {
+            border-color: var(--bs-primary) !important;
+            box-shadow: 0 0 .2rem rgba(32,201,151,0.25) !important;
+        }
+
+        .btn-primary {
+            background-color: var(--bs-primary) !important;
+            border-color: var(--bs-primary) !important;
+            padding: .5rem 1.5rem;
+        }
+
+            .btn-primary:hover {
+                background-color: var(--bs-primary-hover) !important;
+                border-color: var(--bs-primary-hover) !important;
+            }
+    </style>
+}
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Modifier une catégorie";
+}
+
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card form-card p-4">
+                <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+                <form asp-action="Edit" method="post" class="row g-3">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="col-12">
+                        <label asp-for="Nom" class="form-label">Nom de la catégorie</label>
+                        <input asp-for="Nom" class="form-control" placeholder="Entrez le nom" />
+                        <span asp-validation-for="Nom" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary ms-2">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

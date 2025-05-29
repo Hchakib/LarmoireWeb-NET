@@ -1,0 +1,113 @@
+﻿@model LarmoireWeb.Models.Produit
+@using LarmoireWeb.Models
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Rendering
+@inject UserManager<ApplicationUser> UserManager
+
+@section Styles {
+    <style>
+        .edit-card {
+            border: 1px solid #e3e6ea;
+            border-radius: .5rem;
+            box-shadow: 0 .2rem .4rem rgba(0,0,0,0.05);
+        }
+
+        .form-label {
+            font-weight: 500;
+        }
+
+        .btn-success {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-success:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+    </style>
+}
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Modifier le produit";
+    var currentUser = User.Identity.IsAuthenticated
+        ? UserManager.GetUserAsync(User).Result
+        : null;
+    bool isAdmin = currentUser?.Role == "Admin";
+}
+
+<section class="container py-4">
+    <h2 class="mb-4 fw-semibold">@ViewData["Title"]</h2>
+
+    @if (!isAdmin)
+    {
+        <div class="alert alert-danger">Accès refusé — vous n’êtes pas administrateur.</div>
+    }
+    else
+    {
+        <div class="card edit-card p-4 mb-4">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <div class="mb-4 text-center">
+                    <label class="form-label d-block mb-2">Image actuelle</label>
+                    <img src="@Model.ImageUrl" alt="@Model.Nom" class="img-fluid rounded" style="max-height:150px;" />
+                </div>
+            }
+
+            <form asp-action="Edit" method="post" class="row g-3">
+                <input type="hidden" asp-for="Id" />
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="col-md-6">
+                    <label asp-for="Nom" class="form-label">Nom</label>
+                    <input asp-for="Nom" class="form-control" />
+                    <span asp-validation-for="Nom" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Prix" class="form-label">Prix (€)</label>
+                    <input asp-for="Prix" class="form-control" />
+                    <span asp-validation-for="Prix" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="CategorieId" class="form-label">Catégorie</label>
+                    <select asp-for="CategorieId" asp-items="ViewBag.Categories" class="form-select">
+                        <option value="">-- Choisir une catégorie --</option>
+                    </select>
+                    <span asp-validation-for="CategorieId" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="Stock" class="form-label">Quantité en stock</label>
+                    <input asp-for="Stock" class="form-control" />
+                    <span asp-validation-for="Stock" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="ImageUrl" class="form-label">URL de l'image</label>
+                    <input asp-for="ImageUrl" class="form-control" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 mt-3">
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary ms-2">Annuler</a>
+                </div>
+            </form>
+        </div>
+    }
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

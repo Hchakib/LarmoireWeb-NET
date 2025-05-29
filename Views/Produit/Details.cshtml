@@ -1,0 +1,117 @@
+﻿@model LarmoireWeb.Models.Produit
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+@section Styles {
+    <style>
+        /* Carte et effet hover cohérents avec Index */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e3e6ea;
+        }
+
+        .hover-lift {
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+            .hover-lift:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 .4rem .8rem rgba(0,0,0,0.05) !important;
+            }
+        /* Image produit avec ratio et fit */
+        .product-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: contain;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+        }
+        /* Liste de détails */
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            padding: .75rem 1rem;
+        }
+        /* Typographie neutre */
+        .text-muted {
+            color: #6c757d !important;
+        }
+        /* Boutons outline cohérents */
+        .btn-outline-secondary {
+            border-color: #ced4da;
+        }
+
+            .btn-outline-secondary:hover {
+                background-color: #ced4da;
+                color: #212529;
+            }
+    </style>
+}
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Détails du produit";
+    var currentUser = User.Identity.IsAuthenticated ? UserManager.GetUserAsync(User).Result : null;
+    bool isAdmin = currentUser?.Role == "Admin";
+}
+
+<section class="container py-4">
+    <div class="card shadow-sm rounded-2 hover-lift">
+        <div class="row g-0">
+            <div class="col-md-5">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="@Model.Nom" class="product-image" />
+                }
+                else
+                {
+                    <div class="d-flex align-items-center justify-content-center bg-secondary text-white" style="aspect-ratio:4/3;">
+                        Image non disponible
+                    </div>
+                }
+            </div>
+            <div class="col-md-7">
+                <div class="card-body d-flex flex-column">
+                    <h2 class="fw-semibold mb-3 text-dark">@Model.Nom</h2>
+                    <p class="text-muted mb-4">@Model.Description</p>
+
+                    <ul class="list-group list-group-flush mb-4">
+                        <li class="list-group-item">
+                            <span>Prix</span><span class="fw-bold">@Model.Prix.ToString("C")</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span>Catégorie</span><span>@Model.Categorie?.Nom</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span>En stock</span><span>@Model.Stock</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span>Statut</span>
+                            <span><span class="badge @(Model.Stock > 0 ? "bg-success" : "bg-danger")">@Model.Statut</span></span>
+                        </li>
+                    </ul>
+
+                    <div class="mt-auto d-flex flex-wrap gap-2">
+                        <a asp-action="Index" class="btn btn-outline-secondary">Retour</a>
+                        @if (User.Identity.IsAuthenticated && !isAdmin)
+                        {
+                            <form asp-controller="Panier" asp-action="Add" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="produitId" value="@Model.Id" />
+                                <div class="input-group input-group-sm" style="width:120px;">
+                                    <input type="number" name="quantite" value="1" min="1" class="form-control" />
+                                    <button type="submit" class="btn btn-primary ms-1">Ajouter</button>
+                                </div>
+                            </form>
+                        }
+                        @if (isAdmin)
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Modifier</a>
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Supprimer</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
